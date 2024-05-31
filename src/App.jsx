@@ -1,10 +1,13 @@
 import React from "react";
+import Login from "./features/identity/components/login/Login";
+import Register from "./features/identity/components/register/Register";
 
 const App = () => {
   return (
-    <>
-      <p>پلتفرم آموزش آنلاین</p>
-    </>
+    <div>
+      <Login />
+      {/* <Register /> */}
+    </div>
   );
 };
 
