@@ -1,13 +1,12 @@
 import React from "react";
-import Login from "./features/identity/components/login/Login";
-import Register from "./features/identity/components/register/Register";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 
 const App = () => {
   return (
-    <div>
-      <Login />
-      {/* <Register /> */}
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 };
 
