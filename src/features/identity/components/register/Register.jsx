@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useTransition } from "react";
 import logo from "@assets/images/logo.svg";
 import {
   Link,
@@ -10,6 +10,11 @@ import {
 } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { httpsService } from "../../../../core/http-service";
+import { useTranslation } from "react-i18next";
+
+// =======================================
+
+// =======================================
 const Register = () => {
   const {
     register,
@@ -17,6 +22,8 @@ const Register = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const { t } = useTranslation();
 
   const submitForm = useSubmit();
 
@@ -142,7 +149,8 @@ const Register = () => {
                   disabled={isSubmitting}
                   className="btn btn-lg btn-primary"
                 >
-                  {isSubmitting ? "درحال انجام عملیات" : "ثبت نام کنید"}
+                  {t("register.register")}
+                  {/* {isSubmitting ? "درحال انجام عملیات" : "ثبت نام کنید"} */}
                 </button>
               </div>
               {isSuccessOperation && (
