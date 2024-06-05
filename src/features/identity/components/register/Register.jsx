@@ -12,9 +12,6 @@ import { useForm } from "react-hook-form";
 import { httpsService } from "../../../../core/http-service";
 import { useTranslation } from "react-i18next";
 
-// =======================================
-
-// =======================================
 const Register = () => {
   const {
     register,
@@ -53,14 +50,12 @@ const Register = () => {
     <>
       <div className="text-center">
         <img src={logo} style={{ height: "100px" }} />
-        <h1 className="h2">پلتفرم آموزش آنلاین</h1>
+        <h1 className="h2">{t("register.title")}</h1>
+        <p className="lead">{t("register.introMessage")}</p>
         <p className="lead">
-          جهت ورود لازم است از طریق موبایل و رمز عبور خود اقدام کنید
-        </p>
-        <p className="lead">
-          قبلا ثبت نام نکرده اید؟
+          {t("register.alreadyRegistered")}
           <Link to="/login" className="me-2">
-            وارد شوید
+            {t("register.signin")}
           </Link>
         </p>
       </div>
@@ -70,10 +65,10 @@ const Register = () => {
           <div className="m-sm-4">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-3">
-                <label className="form-label">موبایل</label>
+                <label className="form-label"> {t("register.mobile")}</label>
                 <input
                   {...register("mobile", {
-                    required: "موبایل الرامی است",
+                    required: true,
                     minLength: 11,
                     maxLength: 11,
                   })}
@@ -84,23 +79,23 @@ const Register = () => {
 
                 {errors.mobile && errors.mobile.type === "required" && (
                   <p className="text-danger small fw-bolder mt-1">
-                    {errors.mobile?.message}
+                    {t("register.validation.mobileRequired")}
                   </p>
                 )}
                 {errors.mobile &&
                   (errors.mobile.type === "minLength" ||
                     errors.mobile.type === "maxLength") && (
                     <p className="text-danger small fw-bolder mt-1">
-                      موبایل باید11 رقم باشد
+                      {t("register.validation.mobileLength")}
                     </p>
                   )}
               </div>
               <div className="mb-3">
-                <label className="form-label">رمز عبور</label>
+                <label className="form-label">{t("register.password")}</label>
                 <input
                   type="password"
                   {...register("password", {
-                    required: "رمز عبور الزامی است",
+                    required: true,
                   })}
                   className={`form-control form-control-lg mb-2 ${
                     errors.password && "is-invalid"
@@ -108,20 +103,22 @@ const Register = () => {
                 />
                 {errors.password && errors.password.type === "required" && (
                   <p className="text-danger small fw-bolder mt-1">
-                    {errors.password?.message}
+                    {t("register.validation.passwordRequired")}
                   </p>
                 )}
               </div>
 
               <div className="mb-3">
-                <label className="form-label">تکرار رمز عبور</label>
+                <label className="form-label">
+                  {t("register.repeatPassword")}
+                </label>
                 <input
                   type="password"
                   {...register("confirmPassword", {
-                    required: "تکرار رمز عبور الزامی است",
+                    required: true,
                     validate: (value) => {
                       if (watch("password") !== value) {
-                        return "عدم تطابق با رمز وارد شده";
+                        return t("register.validation.notMatching");
                       }
                     },
                   })}
@@ -132,7 +129,7 @@ const Register = () => {
                 {errors.confirmPassword &&
                   errors.confirmPassword.type === "required" && (
                     <p className="text-danger small fw-bolder mt-1">
-                      {errors.confirmPassword?.message}
+                      {t("register.validation.repeatPasswordRequired")}
                     </p>
                   )}
                 {errors.confirmPassword &&
@@ -149,19 +146,20 @@ const Register = () => {
                   disabled={isSubmitting}
                   className="btn btn-lg btn-primary"
                 >
-                  {t("register.register")}
-                  {/* {isSubmitting ? "درحال انجام عملیات" : "ثبت نام کنید"} */}
+                  {isSubmitting ? t("register.saving") : t("register.register")}
                 </button>
               </div>
               {isSuccessOperation && (
                 <div className="alert alert-success text-success p-2 mt-3">
-                  عملیات با موفقیت انجام شد. به صفحه ورود منتقل می شوید.
+                  {t("register.successOperation")}
                 </div>
               )}
               {routeErrors && (
                 <div className="alert alert-danger text-danger p-2 mt-3">
                   {routeErrors.response?.data.map((error) => (
-                    <p className="mb-0">{error.description}</p>
+                    <p className="mb-0">
+                      {t(`register.validation.${error.code}`)}
+                    </p>
                   ))}
                 </div>
               )}

@@ -40,8 +40,8 @@ const ChangeLanguage = () => {
         }`}
       >
         <a
-          className="dropdown-item fw-bolder"
-          style={{ textAlign: "right" }}
+          className="dropdown-item fw-bolder d-flex align-items-center gap-2"
+          style={{ textAlign: language === "fa" ? "right" : "left" }}
           onClick={() => changeLanguage("fa")}
         >
           <img src={faFlag} width="20" className="ms-2" />
@@ -49,8 +49,8 @@ const ChangeLanguage = () => {
         </a>
 
         <a
-          className="dropdown-item fw-bolder"
-          style={{ textAlign: "right" }}
+          className="dropdown-item fw-bolder d-flex align-items-center gap-2"
+          style={{ textAlign: language === "fa" ? "right" : "left" }}
           onClick={() => changeLanguage("en")}
         >
           <img src={enFlag} width="20" className="ms-2" />
