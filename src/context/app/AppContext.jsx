@@ -10,6 +10,7 @@ export const useAppContext = () => {
 
 const initialState = {
   language: localStorage.getItem("language") || "fa",
+  theme: localStorage.getItem("theme") || "light",
 };
 
 export default function AppProvider({ children }) {
@@ -20,6 +21,10 @@ export default function AppProvider({ children }) {
     dispatch({ type: "CHANGE_LANGUAGE", payload: language });
   };
 
+  const changeTheme = (theme) => {
+    dispatch({ type: "CHANGE_THEME", payload: theme });
+  };
+
   useEffect(() => {
     i18n.changeLanguage(state.language);
     localStorage.setItem("language", state.language);
@@ -27,9 +32,13 @@ export default function AppProvider({ children }) {
     document.body.dataset.direction = state.language === "fa" ? "rtl" : "ltr";
   }, [state.language]);
 
+  useEffect(() => {
+    localStorage.setItem("theme", state.theme);
+  }, [state.theme]);
+
   return (
     <>
-      <AppContext.Provider value={{ ...state, changeLanguage }}>
+      <AppContext.Provider value={{ ...state, changeLanguage, changeTheme }}>
         {children}
       </AppContext.Provider>
     </>
