@@ -9,7 +9,7 @@ import {
   useRouteError,
 } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { httpsService } from "../../../../core/http-service";
+import { httpsService } from "@/src/core/http-service";
 import { useTranslation } from "react-i18next";
 
 const Register = () => {
